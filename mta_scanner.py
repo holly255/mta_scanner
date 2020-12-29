@@ -80,3 +80,13 @@ def new_scan():
         sys.stdout.close()
     
     
+def open_scan():
+    new_scan() #Сканирование
+    filepath = os.getcwd()+"/backup_1.txt" #Адрес файла
+    txt_edit.delete("1.0", tk.END) #Очистить поле
+    with open(filepath, "r") as input_file:
+        text = input_file.read()
+        txt_edit.insert(tk.END, text) #Запись из файла
+    window.title(f"MTA Scanner - {filepath}")
+    last_scan_2 = tk.Label(fr_buttons, text=last_time())
+    last_scan_2.grid(row=7, column=0, sticky="ew", padx=5)
