@@ -137,3 +137,14 @@ btn_save = tk.Button(fr_buttons, text="Проверить на наличие и
 btn_open_2 = tk.Button(fr_buttons, text="Резервное хранилище", command=open_file)
 last_scan = tk.Label(fr_buttons, text="Последнее сканирование: ")
 last_scan_2 = tk.Label(fr_buttons, text=last_time())
+
+btn_open.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
+btn_save.grid(row=1, column=0, sticky="ew", padx=5, pady=5)
+btn_open_2.grid(row=2, column=0, sticky="ew", padx=5, pady=5)
+last_scan.grid(row=6, column=0, padx=5)
+last_scan_2.grid(row=7, column=0, sticky="ew", padx=5)
+
+fr_buttons.grid(row=0, column=0, sticky="ns")
+txt_edit.grid(row=0, column=1, sticky="nsew")
+
+window.mainloop()
