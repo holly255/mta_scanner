@@ -41,3 +41,11 @@ def change(input_file, output_file):
             out_file.write(line)
         os.remove(input_file)
 
+        
+def last_time():
+    if os.path.exists("backup_1.txt"):
+        with open('backup_1.txt') as f:
+            last_time = f.readline()
+    else:
+        last_time="Сканирование ни разу не проводилось"
+    return last_time
