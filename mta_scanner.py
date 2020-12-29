@@ -1,9 +1,16 @@
 # — coding: utf-8 —
-import platform
 import os
-import subprocess
-import datetime
+import sys
+import glob
 import shlex
+import random
+import datetime
+import platform
+import subprocess
+from tkinter import *
+import tkinter as tk
+from tkinter.filedialog import askopenfilename
+
 
 
 def data():
@@ -99,3 +106,19 @@ def open_diff():
         text = input_file.read()
         txt_edit.insert(tk.END, text) #Запись из файла
     window.title(f"MTA Scanner - {filepath}")
+    
+    
+def open_file():
+    """Открывает файл для редактирования"""
+    os.chdir(os.getcwd()+"/Backups/")
+    filepath = askopenfilename(
+        filetypes=[("Copy", "*"), ("Text Files", "*.txt"), ("All Files", "*.*")]
+    )
+    if not filepath:
+        return
+    txt_edit.delete("1.0", tk.END)
+    with open(filepath, "r") as input_file:
+        text = input_file.read()
+        txt_edit.insert(tk.END, text)
+    window.title(f"MTA Scanner - {filepath}")
+    os.chdir("../")
