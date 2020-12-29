@@ -11,7 +11,9 @@ def data():
     print('Node :', platform.node())  # Показать имя компьютера в сети
     print('Machine :', platform.machine())  # Показать тип машины
     print('Processor :', platform.processor())  # Показать имя процессора
-<<<<<<< HEAD
+    print('Version :', platform.version())  # Показать версию системы
+    print('Platform :', platform.platform())  # Показать базовую платформу
+    print('Release :', platform.release())  # Показать информацию о выпуске системы
 
 
 def installed():
@@ -20,8 +22,11 @@ def installed():
     output, error = process.communicate()
     print("List installed application: ")
     print(output.decode('UTF-8'))
-=======
-    print('Version :', platform.version())  # Показать версию системы
-    print('Platform :', platform.platform())  # Показать базовую платформу
-    print('Release :', platform.release())  # Показать инфор
->>>>>>> f16042c88591ac5f928c2820c3d122bfba3648ba
+
+def check():
+    check_diff = shlex.split("diff backup_1.txt backup_2.txt")
+    process = subprocess.Popen(check_diff, stdout=subprocess.PIPE)
+    output, error = process.communicate()
+    print("List of changes: ")
+    print(output.decode('UTF-8'))
+
