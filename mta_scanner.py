@@ -122,3 +122,18 @@ def open_file():
         txt_edit.insert(tk.END, text)
     window.title(f"MTA Scanner - {filepath}")
     os.chdir("../")
+    
+    
+window = tk.Tk()
+window.title("MTA Scanner") #Создаёт новое окно с заголовком
+
+window.rowconfigure(0, minsize=800, weight=1)
+window.columnconfigure(1, minsize=800, weight=1) #Устанавливают конфигурацию строк и столбцов
+#Создают виджеты — текстовый бокс, рамку и кнопки.
+txt_edit = tk.Text(window)
+fr_buttons = tk.Frame(window)
+btn_open = tk.Button(fr_buttons, text="Сканировать", command=open_scan)
+btn_save = tk.Button(fr_buttons, text="Проверить на наличие изменений", command=open_diff)
+btn_open_2 = tk.Button(fr_buttons, text="Резервное хранилище", command=open_file)
+last_scan = tk.Label(fr_buttons, text="Последнее сканирование: ")
+last_scan_2 = tk.Label(fr_buttons, text=last_time())
