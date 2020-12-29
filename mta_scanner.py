@@ -90,3 +90,12 @@ def open_scan():
     window.title(f"MTA Scanner - {filepath}")
     last_scan_2 = tk.Label(fr_buttons, text=last_time())
     last_scan_2.grid(row=7, column=0, sticky="ew", padx=5)
+    
+    
+def open_diff():
+    filepath = os.getcwd()+"/differents.txt" #Адрес файла
+    txt_edit.delete("1.0", tk.END) #Очистить поле
+    with open(filepath, "r") as input_file:
+        text = input_file.read()
+        txt_edit.insert(tk.END, text) #Запись из файла
+    window.title(f"MTA Scanner - {filepath}")
