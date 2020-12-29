@@ -49,3 +49,34 @@ def last_time():
     else:
         last_time="Сканирование ни разу не проводилось"
     return last_time
+
+def new_scan():
+    if os.path.exists("backup_1.txt"): #Если есть предыдущий скан
+        sys.stdout = open("backup_2.txt", "w") #Запись в временный файл
+        print(datetime.datetime.now().strftime('%Y-%m-%d__%H:%M:%S')) #Первая строчка - время
+        data() #Сведения о системе
+        installed() #Установленные пакеты
+        sys.stdout.close()
+
+        sys.stdout = open("differents.txt", "w")
+        check() #Сравнение временного файла и последнего сканирования. Запись различия в файл different.txt
+        sys.stdout.close()
+
+        if not os.path.exists("Backups"): #Проверка на существование директории для резервного хранения
+            os.mkdir(os.getcwd()+"/Backups/") #Создание директории для резервного хранения
+        cwd = os.getcwd()+"/Backups/"
+        change("backup_1.txt", cwd + datetime.datetime.now().strftime('%Y-%m-%d__%H:%M:%S')) #Копирование предыдущего скана в резервное хранилище
+        change("backup_2.txt", "backup_1.txt") #Копирование временного файла в основной
+
+    else:# Если предыдущего скана нет
+        sys.stdout = open("backup_1.txt", "w")
+        print(datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')) #Запись в новый файл
+        data()
+        installed()
+        sys.stdout.close()
+
+        sys.stdout = open("differents.txt", "w")
+        print("Не найдено последних проверок")
+        sys.stdout.close()
+    
+    
