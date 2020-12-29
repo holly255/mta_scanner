@@ -11,6 +11,7 @@ from tkinter import *
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
 
+# ------------------Данные о системе------------------
 
 
 def data():
@@ -25,6 +26,8 @@ def data():
     print('Platform :', platform.platform())  # Показать базовую платформу
     print('Release :', platform.release())  # Показать информацию о выпуске системы
 
+# ------------------Установленные пакеты------------------
+
 
 def installed():
     dpkg_list = shlex.split("dpkg-query -Wf '${Installed-Size}\t${Package}\n'")
@@ -33,6 +36,8 @@ def installed():
     print("List installed application: ")
     print(output.decode('UTF-8'))
 
+ # ------------------Сравнение сканов------------------
+    
     
 def check():
     check_diff = shlex.split("diff backup_1.txt backup_2.txt")
@@ -41,6 +46,8 @@ def check():
     print("List of changes: ")
     print(output.decode('UTF-8'))
     
+# ------------------Копирование файла------------------
+
     
 def change(input_file, output_file):
     with open(input_file, 'r') as in_file, open(output_file, 'w') as out_file:
@@ -48,7 +55,9 @@ def change(input_file, output_file):
             out_file.write(line)
         os.remove(input_file)
 
-        
+# ------------------Последний скан----------------  
+
+
 def last_time():
     if os.path.exists("backup_1.txt"):
         with open('backup_1.txt') as f:
@@ -57,6 +66,7 @@ def last_time():
         last_time="Сканирование ни разу не проводилось"
     return last_time
 
+# ------------------Сканирование----------------
 def new_scan():
     if os.path.exists("backup_1.txt"): #Если есть предыдущий скан
         sys.stdout = open("backup_2.txt", "w") #Запись в временный файл
@@ -87,6 +97,10 @@ def new_scan():
         sys.stdout.close()
     
     
+# ------------------Работа с графическим интерфейсом----------------
+
+
+# ------------------Открыть скан----------------
 def open_scan():
     new_scan() #Сканирование
     filepath = os.getcwd()+"/backup_1.txt" #Адрес файла
@@ -98,6 +112,7 @@ def open_scan():
     last_scan_2 = tk.Label(fr_buttons, text=last_time())
     last_scan_2.grid(row=7, column=0, sticky="ew", padx=5)
     
+# ------------------Открыть различия с предыдущим сканом----------------    
     
 def open_diff():
     filepath = os.getcwd()+"/differents.txt" #Адрес файла
@@ -107,6 +122,7 @@ def open_diff():
         txt_edit.insert(tk.END, text) #Запись из файла
     window.title(f"MTA Scanner - {filepath}")
     
+# ------------------Открыть резервный файл----------------
     
 def open_file():
     """Открывает файл для редактирования"""
