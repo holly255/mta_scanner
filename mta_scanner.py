@@ -25,6 +25,7 @@ def installed():
     output, error = process.communicate()
     print("List installed application: ")
     print(output.decode('UTF-8'))
+    
 
 def check():
     check_diff = shlex.split("diff backup_1.txt backup_2.txt")
@@ -32,4 +33,11 @@ def check():
     output, error = process.communicate()
     print("List of changes: ")
     print(output.decode('UTF-8'))
+    
+    
+ def change(input_file, output_file):
+    with open(input_file, 'r') as in_file, open(output_file, 'w') as out_file:
+        for line in in_file:
+            out_file.write(line)
+        os.remove(input_file)
 
