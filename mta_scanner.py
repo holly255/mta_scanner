@@ -1,6 +1,9 @@
 # — coding: utf-8 —
 import platform
 import os
+import subprocess
+import datetime
+import shlex
 
 
 def data():
